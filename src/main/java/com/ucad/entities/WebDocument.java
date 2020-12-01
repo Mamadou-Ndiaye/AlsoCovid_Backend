@@ -23,10 +23,10 @@ public class WebDocument {
     private  String resume;
     private  String[][] bodySpacy;
     private  double environnement;
-    private  double  connaissance_covid;
+    public   double  conCovid;
     private  double identite;
     private  double objet;
-    private  double historique_sanitaire;
+    private  double histSanitaire;
     private  double nutrition;
     private  String[] img;
     private  String[] videos;
