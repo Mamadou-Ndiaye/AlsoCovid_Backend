@@ -15,6 +15,12 @@ import java.util.List;
 @CrossOrigin
 @RepositoryRestResource
 public interface WebDocumentRepository  extends MongoRepository<WebDocument,String> {
+
+    @RestResource(path = "/byTitre")
+    public Page<WebDocument>  findByTitreContainsIgnoreCase(@Param("titre") String titre,Pageable pageable);
+
+    public  Page<WebDocument>  findByTitreContainsAndResumeContainsIgnoreCase(@Param("titre") String titre, @Param("res") String resume,Pageable pageable);
+
  // tout ce que nous avons fait avce objet mapping relationnel on peut le faire avec objet document
 
  // Dans les CNTP on ne doit pas reecrire ces methodes dans le controlleur ensuite dans le repository
@@ -37,6 +43,7 @@ public interface WebDocumentRepository  extends MongoRepository<WebDocument,Stri
 
     @RestResource(path = "/webDocumentOrderByObjet")
     public Page<WebDocument>  findByOrderByObjetDesc(Pageable pageable);
+
 
 
 }

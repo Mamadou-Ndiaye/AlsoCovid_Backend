@@ -1,5 +1,6 @@
-package com.ucad.dao;
+package com.ucad.controller;
 
+import com.ucad.dao.UtilisateurRepository;
 import com.ucad.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

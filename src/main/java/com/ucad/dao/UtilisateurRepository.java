@@ -16,8 +16,4 @@ public interface UtilisateurRepository extends MongoRepository<Utilisateur,Strin
      @RestResource(path = "/etatUtilisateur")
     public List<Utilisateur>  findAllByEtatIsFalse();
 
-
-
-
-
 }

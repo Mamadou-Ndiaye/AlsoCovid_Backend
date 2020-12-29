@@ -6,19 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.Date;
 
 @Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Utilisateur {
+public class Article {
+
     @Id
     private  String id;
-    private  String login;
-    private  String password;
-    public   boolean etat;
-    private  String[] profils;
-
+    private  String url;
+    private  String type;
+    private  String titre;
+    private  String book;
+    private   String date;
+    private  String auteurs1;
+    private  String auteurs2;
 }

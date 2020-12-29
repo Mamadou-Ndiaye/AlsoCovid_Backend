@@ -1,9 +1,11 @@
-package com.ucad.dao;
+package com.ucad.controller;
 
+import com.ucad.dao.WebDocumentRepository;
 import com.ucad.entities.Utilisateur;
 import com.ucad.entities.WebDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +18,7 @@ import java.util.List;
 @RestController
 public class DocumentController {
     @Autowired
-    WebDocumentRepository  webDocumentRepository;
+    WebDocumentRepository webDocumentRepository;
     @GetMapping(path = "/docs")
     public List<WebDocument> listDocument(){
         return webDocumentRepository.findAll();
@@ -45,5 +47,9 @@ public class DocumentController {
     @GetMapping(path = "/webDocumentOrderByObjet")
     public Page<WebDocument>  listObjet(Pageable pageable)
     { return webDocumentRepository.findByOrderByObjetDesc(pageable);}
+
+    @RestResource(path = "/findbyTitre")
+    public Page<WebDocument>  finfByTitre(@Param("titre") String titre, Pageable pageable)
+    { return webDocumentRepository.findByTitreContainsIgnoreCase(titre,pageable);}
 }
 
