@@ -1,18 +1,16 @@
 package com.ucad;
 
 
-import com.ucad.dao.ArticleRepository;
-import com.ucad.dao.UtilisateurRepository;
-import com.ucad.dao.WebDocumentRepository;
-import com.ucad.entities.Article;
-import com.ucad.entities.Utilisateur;
+import com.ucad.dao.*;
+import com.ucad.entities.*;
 
-import com.ucad.entities.WebDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 @SpringBootApplication
 public class ScrawlingpresentationApplication {
@@ -23,19 +21,33 @@ public class ScrawlingpresentationApplication {
     }
    @Autowired
    UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    RepositoryRestConfiguration repositoryRestConfiguration;
+
     @Autowired
     ArticleRepository articleRepository;
+    @Autowired
+    NatureRepository natureRepository;
+
+    @Autowired
+    PlosOneRepository plosOneRepository;
+
    @Bean
     CommandLineRunner start(WebDocumentRepository webDocumentRepository){
+       repositoryRestConfiguration.exposeIdsFor(WebDocument.class);
         return args -> {
           //  utilisateurRepository.save(new Utilisateur(null,"mamadou","openopen",false,null));
             //utilisateurRepository.save(new Utilisateur(null,"chimi","1234",false,null));
             //utilisateurRepository.save(new Utilisateur(null,"einstein","einstein",false,null));
          // webDocumentRepository.save( new WebDocument(null,"https://www.afro.who.int/health-topics/coronavirus-covid-19","english","Coronavirus",
            //      "Even before the first confirmed case of COVID-19",null,0.0,0.0,0.0,0.0,0.0,0.0,null,null,null));
-            // articleRepository.save(new Article(null,null,null,null,null,null,null,null));
+            // articleRepository.save(new Article(null,null,null,null,null,null,null));
+            //plosOneRepository.save(new PlosOne(null,null,null,null,null,null));
             System.out.print("Hello world");
         };
    }
+
+
 
 }

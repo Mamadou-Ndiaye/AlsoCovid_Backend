@@ -51,7 +51,7 @@ public class PlosOneController {
     }
 
 
-    // Chemin d accees http://localhost:8080/byFiltrePloseOneAnnee?annee=2020
+    // Chemin d accees http://localhost:8080/byFiltrePlosOneAnnee?annee=2020
     @GetMapping(path = "/byFiltrePlosOneAnnee")
     public List<PlosOne> findByAnneeContains(@RequestParam(required = false,name = "annee") String annee[]) {
         List<PlosOne>  res= new ArrayList<PlosOne>();
