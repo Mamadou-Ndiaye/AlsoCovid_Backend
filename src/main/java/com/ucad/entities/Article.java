@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 public class Article {
-     // Article renvoie aux donnees que nous recuperer de Science Direct donc on pouvait le nommer ScienceDirect comme
+     // Article renvoie aux donnees que nous avons recuperer de Science Direct donc on pouvait le nommer ScienceDirect comme
     // les autres qui portent les informations de leurs site web exmple Nature et PlosOne
     @Id
     private  String id;

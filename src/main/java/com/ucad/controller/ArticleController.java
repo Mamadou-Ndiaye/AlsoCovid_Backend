@@ -20,6 +20,8 @@ public class ArticleController {
     @Autowired
     ArticleRepository articleRepository;
 
+    //On a 3 cas soit on coche sur Annee et Type ,soit on coche sur type simplement ,soit on coche sur annee
+
 
     // http://localhost:8080/byFiltreArticle?type=res&annee=2020
     @GetMapping(path = "/byFiltreArticle")

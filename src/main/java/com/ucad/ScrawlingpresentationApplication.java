@@ -11,13 +11,14 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 
 @SpringBootApplication
 
-public class ScrawlingpresentationApplication {
+public class ScrawlingpresentationApplication  extends SpringBootServletInitializer {
     String[] profile= new String[0];
 
     public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class ScrawlingpresentationApplication {
    @Bean
     CommandLineRunner start(WebDocumentRepository webDocumentRepository){
        repositoryRestConfiguration.exposeIdsFor(WebDocument.class);
-        return args -> {
+         return args -> {
           //  utilisateurRepository.save(new Utilisateur(null,"mamadou","openopen",false,null));
             //utilisateurRepository.save(new Utilisateur(null,"chimi","1234",false,null));
             //utilisateurRepository.save(new Utilisateur(null,"einstein","einstein",false,null));

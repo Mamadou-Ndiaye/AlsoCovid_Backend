@@ -1,25 +1,29 @@
 package com.ucad.controller;
 
-import com.sipios.springsearch.anotation.SearchSpec;
+
 import com.ucad.dao.WebDocumentRepository;
-import com.ucad.entities.Utilisateur;
+
 import com.ucad.entities.WebDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
+
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 @CrossOrigin
@@ -48,6 +52,7 @@ public class DocumentController {
         return  res;
     }
 
+
 /*
 
     @GetMapping(path = "/filtre")
@@ -70,6 +75,16 @@ public class DocumentController {
         // (List<WebDocument>) webDocumentRepository.findByTitreContainsIgnoreCase(titre,pageable);
     }
 */
+
+    @GetMapping(value = "/imageWho/{id}",produces ={MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE,MediaType.APPLICATION_PDF_VALUE},consumes = MediaType.ALL_VALUE)
+    public  byte[] images(@PathVariable(name = "id")String id) throws IOException {
+        WebDocument webDocument =webDocumentRepository.findById(id).get();
+        //String photoName=webDocument.getUrl();
+        int a  =new Random().nextInt(webDocument.getImg().length); // nombre aleatoires sur le tableau d image que nous avons
+        File file= new File(System.getProperty("user.home")+"/alsocovid/image/"+webDocument.getImg()[a]);
+        Path path= Paths.get(file.toURI());
+        return Files.readAllBytes(path);
+    }
 
     @GetMapping(path = "/maladies")
     public Page<WebDocument> listDocsByMaladie( @RequestParam (required = false,defaultValue = "maladie") String titre,Pageable pageable ){

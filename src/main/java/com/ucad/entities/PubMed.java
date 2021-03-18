@@ -7,18 +7,18 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
 @Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Utilisateur {
+public class PubMed {
     @Id
     private  String id;
-    private  String login;
-    private  String password;
-    public   boolean etat;
-    private  String[] profils;
-
+    private  String url;
+    // private  String type;
+    private  String titre;
+    private  String date;
+    private  String auteurs;
 }
+

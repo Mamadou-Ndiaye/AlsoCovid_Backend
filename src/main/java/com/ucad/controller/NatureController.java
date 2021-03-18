@@ -19,6 +19,8 @@ public class NatureController {
     @Autowired
     NatureRepository natureRepository;
 
+    //On a 3 cas soit on coche sur Annee et Type ,soit on coche sur type simplement ,soit on coche sur annee
+
     // http://localhost:8080/byFiltreNature?type=res&annee=2020
     @GetMapping(path = "/byFiltreNature")
     public List<Nature> findByTitreContains(@RequestParam(required = false,name = "type") String type[] , @RequestParam(required = false,name = "annee") String annee[]) {
