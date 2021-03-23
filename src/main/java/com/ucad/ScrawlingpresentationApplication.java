@@ -40,10 +40,12 @@ public class ScrawlingpresentationApplication  extends SpringBootServletInitiali
 
     @Autowired
     PlosOneRepository plosOneRepository;
+    @Autowired
+    WhoRepository whoRepository;
 
    @Bean
     CommandLineRunner start(WebDocumentRepository webDocumentRepository){
-       repositoryRestConfiguration.exposeIdsFor(WebDocument.class);
+       repositoryRestConfiguration.exposeIdsFor(WebDocument.class,Who.class);
          return args -> {
           //  utilisateurRepository.save(new Utilisateur(null,"mamadou","openopen",false,null));
             //utilisateurRepository.save(new Utilisateur(null,"chimi","1234",false,null));

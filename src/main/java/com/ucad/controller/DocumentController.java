@@ -81,6 +81,12 @@ public class DocumentController {
         WebDocument webDocument =webDocumentRepository.findById(id).get();
         //String photoName=webDocument.getUrl();
         int a  =new Random().nextInt(webDocument.getImg().length); // nombre aleatoires sur le tableau d image que nous avons
+        while(webDocument.getImg().length>1 && webDocument.getImg()[a].equalsIgnoreCase("tranform.jpg")  )
+        {
+             a  =new Random().nextInt(webDocument.getImg().length);
+        }
+        /*System.out.println("Nom du photo = "+webDocument.getImg()[a]);
+        System.out.println("La taille du tableau"+webDocument.getImg().length);*/
         File file= new File(System.getProperty("user.home")+"/alsocovid/image/"+webDocument.getImg()[a]);
         Path path= Paths.get(file.toURI());
         return Files.readAllBytes(path);
