@@ -8,16 +8,18 @@ import com.ucad.dao.WhoRepository;
 import com.ucad.entities.WebDocument;
 import com.ucad.entities.Who;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 @CrossOrigin
@@ -27,12 +29,37 @@ public class WhoController {
     @Autowired
     WhoRepository  whoRepository;
 
+     // Pour recuperer les variables declarer dans application.properties
+    public Properties getProperties()
+    {
+        Properties pros= new Properties();
+        try{
+              pros.load(getClass().getResourceAsStream("/application.properties"));
+              return  pros;
+        }
+        catch(Exception ex){
+            System.out.println (ex.toString());
+            ex.printStackTrace();
+            System.out.println("Could not find file ");
+            return  pros;
+        }
+
+    }
+
+    @Value("${mon.variable.url}")
+    private String appTitle;
+
     @GetMapping(value = "/imageOms/{id}",produces ={MediaType.IMAGE_JPEG_VALUE,MediaType.IMAGE_PNG_VALUE,MediaType.APPLICATION_PDF_VALUE},consumes = MediaType.ALL_VALUE)
     public  byte[] images(@PathVariable(name = "id")String id) throws IOException {
         Who who =whoRepository.findById(id).get();
-        File file= new File(System.getProperty("user.home")+"/alsocovid/images/"+who.getImg());
+        //System.getProperty("user.home");
+       // System.out.println("Chemin des photos methode 2 " +appTitle);
+        String chemin= getProperties().getProperty("mon.variable.url");
+       // System.out.println("******************** "+chemin);
+       // File file= new File("C:/Users/MamadouNdiayeDevops"+"/alsocovid/images/"+who.getImg());
+        File file= new File(chemin+"/images/"+who.getImg());
         Path path= Paths.get(file.toURI());
-        //System.out.println("+++++++++++++++++ "+path);
+       // System.out.println("+++++++++++++++++ "+path);
         return Files.readAllBytes(path);
 
     }
